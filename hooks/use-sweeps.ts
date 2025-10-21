@@ -1,11 +1,7 @@
 "use client";
 import useSWR from "swr";
-import type {
-  SweepsResponse,
-  AggregatedSweepsResponse,
-  SweepsFilters,
-  AggregatedSweepsFilters,
-} from "../lib/api";
+import type { SweepsResponse, AggregatedSweepsResponse } from "../lib/types";
+import type { SweepsFilters, AggregatedSweepsFilters } from "../lib/api";
 import { fetchSweeps, fetchAggregatedSweeps } from "../lib/api";
 
 export function useSweeps(filters: SweepsFilters = {}) {
