@@ -1,0 +1,14 @@
+{
+    "success": true,
+    "data": {
+        "period": "1d",
+        "total_sweeps": 120,
+        "total_big_odd_ask_value": 124297.0156,
+        "total_post_order_value": 3098.4566,
+        "success_rate": 100,
+        "successful_sweeps": 120,
+        "failed_sweeps": 0,
+        "start_time": "2025-10-19T15:19:53.20735946+07:00",
+        "end_time": "2025-10-20T15:19:53.20735946+07:00"
+    }
+}
