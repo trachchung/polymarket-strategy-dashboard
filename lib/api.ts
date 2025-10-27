@@ -2,6 +2,7 @@ import axios from "axios";
 import type {
   SweepsResponse,
   AggregatedSweepsResponse,
+  DailyMetricsResponse,
   SweepSortField,
   SortDirection,
   AggregationPeriod,
@@ -23,6 +24,11 @@ export interface SweepsFilters {
 export interface AggregatedSweepsFilters {
   period?: AggregationPeriod;
   market_type?: MarketType;
+}
+
+export interface DailyMetricsFilters {
+  limit?: number;
+  offset?: number;
 }
 
 export async function fetchSweeps(
@@ -84,6 +90,30 @@ export async function fetchAggregatedSweeps(
     return response.data;
   } catch (error) {
     console.error("Error fetching aggregated sweeps:", error);
+    throw error;
+  }
+}
+
+export async function fetchDailyMetrics(
+  filters: DailyMetricsFilters = {}
+): Promise<DailyMetricsResponse> {
+  const params = new URLSearchParams();
+
+  // Set defaults
+  const limit = filters.limit ?? 30;
+  const offset = filters.offset ?? 0;
+
+  params.append("limit", limit.toString());
+  params.append("offset", offset.toString());
+
+  const queryString = params.toString();
+  const url = `${API_URL}/api/sweeps/daily-metrics?${queryString}`;
+
+  try {
+    const response = await axios.get<DailyMetricsResponse>(url);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching daily metrics:", error);
     throw error;
   }
 }

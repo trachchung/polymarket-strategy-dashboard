@@ -1,0 +1,110 @@
+{
+    "success": true,
+    "data": {
+        "data": [
+            {
+                "date": "2025-10-27T00:00:00Z",
+                "total_sweeps": 70,
+                "total_sent_value": 1569.0457,
+                "max_possible_value": 27281.661,
+                "total_profit": 21.376,
+                "total_loss": 0,
+                "win_sweeps": 64,
+                "lose_sweeps": 0,
+                "win_rate": 91.42857142857143
+            },
+            {
+                "date": "2025-10-26T00:00:00Z",
+                "total_sweeps": 182,
+                "total_sent_value": 3945.988,
+                "max_possible_value": 9839.9829,
+                "total_profit": 56.021,
+                "total_loss": 0,
+                "win_sweeps": 171,
+                "lose_sweeps": 0,
+                "win_rate": 93.95604395604396
+            },
+            {
+                "date": "2025-10-25T00:00:00Z",
+                "total_sweeps": 254,
+                "total_sent_value": 4376.9272,
+                "max_possible_value": 166714.9881,
+                "total_profit": 62.0977,
+                "total_loss": 0,
+                "win_sweeps": 155,
+                "lose_sweeps": 0,
+                "win_rate": 61.023622047244096
+            },
+            {
+                "date": "2025-10-24T00:00:00Z",
+                "total_sweeps": 191,
+                "total_sent_value": 4346.1708,
+                "max_possible_value": 99401.7787,
+                "total_profit": 64.7794,
+                "total_loss": 0,
+                "win_sweeps": 169,
+                "lose_sweeps": 0,
+                "win_rate": 88.48167539267016
+            },
+            {
+                "date": "2025-10-23T00:00:00Z",
+                "total_sweeps": 248,
+                "total_sent_value": 3621.8749,
+                "max_possible_value": 199645.0996,
+                "total_profit": 56.6677,
+                "total_loss": 0,
+                "win_sweeps": 153,
+                "lose_sweeps": 0,
+                "win_rate": 61.693548387096776
+            },
+            {
+                "date": "2025-10-22T00:00:00Z",
+                "total_sweeps": 174,
+                "total_sent_value": 3853.5612,
+                "max_possible_value": 10989,
+                "total_profit": 54.6846,
+                "total_loss": 0,
+                "win_sweeps": 166,
+                "lose_sweeps": 0,
+                "win_rate": 95.40229885057471
+            },
+            {
+                "date": "2025-10-21T00:00:00Z",
+                "total_sweeps": 150,
+                "total_sent_value": 3330.904,
+                "max_possible_value": 49950,
+                "total_profit": 45.6352,
+                "total_loss": 0,
+                "win_sweeps": 141,
+                "lose_sweeps": 0,
+                "win_rate": 94
+            },
+            {
+                "date": "2025-10-20T00:00:00Z",
+                "total_sweeps": 61,
+                "total_sent_value": 1798.0703,
+                "max_possible_value": 11924.5635,
+                "total_profit": 16.0397,
+                "total_loss": 0,
+                "win_sweeps": 61,
+                "lose_sweeps": 0,
+                "win_rate": 100
+            },
+            {
+                "date": "2025-10-19T00:00:00Z",
+                "total_sweeps": 104,
+                "total_sent_value": 1942.2738,
+                "max_possible_value": 11548.44,
+                "total_profit": 25.8677,
+                "total_loss": 0,
+                "win_sweeps": 104,
+                "lose_sweeps": 0,
+                "win_rate": 100
+            }
+        ],
+        "total": 9,
+        "limit": 30,
+        "offset": 0,
+        "hasMore": false
+    }
+}

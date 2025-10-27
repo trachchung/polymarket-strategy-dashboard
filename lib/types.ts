@@ -350,3 +350,27 @@ export type MarketType =
 export type SweepSortField = "created_at" | "post_order_value";
 export type SortDirection = "asc" | "desc";
 export type AggregationPeriod = "1d" | "3d" | "7d" | "1m" | "all";
+
+// Daily metrics types
+export interface DailyMetric {
+  date: string;
+  total_sweeps: number;
+  total_sent_value: number;
+  max_possible_value: number;
+  total_profit: number;
+  total_loss: number;
+  win_sweeps: number;
+  lose_sweeps: number;
+  win_rate: number;
+}
+
+export interface DailyMetricsResponse {
+  success: boolean;
+  data: {
+    data: DailyMetric[];
+    total: number;
+    limit: number;
+    offset: number;
+    hasMore: boolean;
+  };
+}

@@ -7,11 +7,8 @@ import { BarChart3, History, Home, Settings, Activity } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navigation = [
-  { name: "Dashboard", icon: Home, href: "/", current: true },
-  { name: "Sweeps", icon: Activity, href: "#sweeps", current: false },
-  { name: "Analytics", icon: BarChart3, href: "#analytics", current: false },
-  { name: "History", icon: History, href: "#history", current: false },
-  { name: "Settings", icon: Settings, href: "#settings", current: false },
+  { name: "Dashboard", icon: Home, href: "/" },
+  { name: "Daily Metrics", icon: Activity, href: "/daily-metrics" },
 ];
 
 export function Sidebar() {
