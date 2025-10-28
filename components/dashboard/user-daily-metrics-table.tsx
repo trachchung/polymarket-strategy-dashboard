@@ -164,9 +164,9 @@ export function UserDailyMetricsTable() {
                 <TableHead className="w-[100px]">Total Trades</TableHead>
                 <TableHead className="w-[100px]">Buy Trades</TableHead>
                 <TableHead className="w-[100px]">Sell Trades</TableHead>
-                <TableHead className="w-[120px]">Total Volume</TableHead>
-                <TableHead className="w-[120px]">Buy Volume</TableHead>
-                <TableHead className="w-[120px]">Sell Volume</TableHead>
+                <TableHead className="w-[120px]">Total Size</TableHead>
+                <TableHead className="w-[120px]">Buy Size</TableHead>
+                <TableHead className="w-[120px]">Sell Size</TableHead>
                 <TableHead className="w-[120px]">Total Value</TableHead>
                 <TableHead className="w-[120px]">Buy Value</TableHead>
                 <TableHead className="w-[120px]">Sell Value</TableHead>
@@ -234,21 +234,21 @@ export function UserDailyMetricsTable() {
                     {/* Total Volume */}
                     <TableCell>
                       <div className="text-sm font-mono">
-                        {formatCurrency(metric.totalVolume)}
+                        {metric.totalVolume}
                       </div>
                     </TableCell>
 
                     {/* Buy Volume */}
                     <TableCell>
                       <div className="text-sm font-mono text-green-500">
-                        {formatCurrency(metric.buyVolume)}
+                        {metric.buyVolume}
                       </div>
                     </TableCell>
 
                     {/* Sell Volume */}
                     <TableCell>
                       <div className="text-sm font-mono text-red-500">
-                        {formatCurrency(metric.sellVolume)}
+                        {metric.sellVolume}
                       </div>
                     </TableCell>
 
