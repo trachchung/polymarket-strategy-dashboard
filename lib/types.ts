@@ -374,3 +374,42 @@ export interface DailyMetricsResponse {
     hasMore: boolean;
   };
 }
+
+// User daily metrics types
+export interface UserDailyMetric {
+  proxyWallet: string;
+  date: string;
+  totalTrades: number;
+  buyTrades: number;
+  sellTrades: number;
+  totalVolume: number;
+  totalValue: number;
+  buyVolume: number;
+  buyValue: number;
+  sellVolume: number;
+  sellValue: number;
+  averagePrice: number;
+  averageBuyPrice: number;
+  averageSellPrice: number;
+  uniqueMarketsTraded: number;
+  uniqueEventsTraded: number;
+  totalClosedPositions: number;
+  profitablePositions: number;
+  losingPositions: number;
+  totalProfit: number;
+  totalLoss: number;
+  largestProfit: number;
+  largestLoss: number;
+  winRate: number;
+}
+
+export interface UserDailyMetricsResponse {
+  success: boolean;
+  data: {
+    data: UserDailyMetric[];
+    total: number;
+    limit: number;
+    offset: number;
+    hasMore: boolean;
+  };
+}

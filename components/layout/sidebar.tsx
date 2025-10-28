@@ -3,12 +3,20 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BarChart3, History, Home, Settings, Activity } from "lucide-react";
+import {
+  BarChart3,
+  History,
+  Home,
+  Settings,
+  Activity,
+  Users,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navigation = [
   { name: "Dashboard", icon: Home, href: "/" },
   { name: "Daily Metrics", icon: Activity, href: "/daily-metrics" },
+  { name: "User Metrics", icon: Users, href: "/user-metrics" },
 ];
 
 export function Sidebar() {

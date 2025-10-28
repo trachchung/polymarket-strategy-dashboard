@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { Bell, Settings, TrendingUp } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
+import { Bell, Settings, TrendingUp } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 export function Header() {
   return (
@@ -13,8 +13,12 @@ export function Header() {
             <TrendingUp className="h-6 w-6 text-white" />
           </div>
           <div>
-            <h1 className="text-lg font-semibold tracking-tight">Prediction Market Arbitrage</h1>
-            <p className="text-xs text-[var(--color-text-secondary)]">Real-time opportunities</p>
+            <h1 className="text-lg font-semibold tracking-tight">
+              Prediction Market Vét
+            </h1>
+            <p className="text-xs text-[var(--color-text-secondary)]">
+              Real-time sweeps
+            </p>
           </div>
         </div>
 
@@ -26,7 +30,10 @@ export function Header() {
 
           <Button variant="ghost" size="icon" className="relative">
             <Bell className="h-5 w-5" />
-            <Badge className="absolute -right-1 -top-1 h-5 w-5 rounded-full p-0 text-xs" variant="destructive">
+            <Badge
+              className="absolute -right-1 -top-1 h-5 w-5 rounded-full p-0 text-xs"
+              variant="destructive"
+            >
               3
             </Badge>
           </Button>
@@ -37,5 +44,5 @@ export function Header() {
         </div>
       </div>
     </header>
-  )
+  );
 }

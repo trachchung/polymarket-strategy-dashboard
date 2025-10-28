@@ -6,9 +6,9 @@ export default function DailyMetricsPage() {
     <AppLayout>
       <div className="space-y-6 p-6">
         <div>
-          <h1 className="text-3xl font-bold">Daily Trading Metrics</h1>
+          <h1 className="text-3xl font-bold">Daily Sweep Metrics</h1>
           <p className="text-[var(--color-text-secondary)] mt-2">
-            Track your trading performance across different days
+            Track your sweep performance across different days
           </p>
         </div>
         <DailyMetricsTable />

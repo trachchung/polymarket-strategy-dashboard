@@ -1,0 +1,63 @@
+{
+    "success": true,
+    "data": {
+        "data": [
+            {
+                "proxyWallet": "0x789eae0370992d095669515497a9a09c22212a23",
+                "date": "2025-10-28T00:00:00Z",
+                "totalTrades": 135,
+                "buyTrades": 125,
+                "sellTrades": 10,
+                "totalVolume": 2916.121068,
+                "totalValue": 2836.032856,
+                "buyVolume": 2810.121068,
+                "buyValue": 2762.862856,
+                "sellVolume": 106,
+                "sellValue": 73.17,
+                "averagePrice": 0.9590413354747908,
+                "averageBuyPrice": 0.9826938730820048,
+                "averageSellPrice": 0.6633846153846154,
+                "uniqueMarketsTraded": 108,
+                "uniqueEventsTraded": 108,
+                "totalClosedPositions": 40,
+                "profitablePositions": 37,
+                "losingPositions": 3,
+                "totalProfit": 16.859797,
+                "totalLoss": 23.75,
+                "largestProfit": 1.27792,
+                "largestLoss": 10.5,
+                "winRate": 92.5
+            },
+            {
+                "proxyWallet": "0x789eae0370992d095669515497a9a09c22212a23",
+                "date": "2025-10-27T00:00:00Z",
+                "totalTrades": 205,
+                "buyTrades": 195,
+                "sellTrades": 10,
+                "totalVolume": 4582.799084,
+                "totalValue": 4441.454123,
+                "buyVolume": 4408.309084,
+                "buyValue": 4335.283023,
+                "sellVolume": 174.49,
+                "sellValue": 106.1711,
+                "averagePrice": 0.9669345395309443,
+                "averageBuyPrice": 0.9831194402570207,
+                "averageSellPrice": 0.6513289753724536,
+                "uniqueMarketsTraded": 173,
+                "uniqueEventsTraded": 173,
+                "totalClosedPositions": 143,
+                "profitablePositions": 135,
+                "losingPositions": 8,
+                "totalProfit": 56.636401,
+                "totalLoss": 61.560285,
+                "largestProfit": 1.848444,
+                "largestLoss": 24.18,
+                "winRate": 94.4055944055944
+            }
+        ],
+        "total": 8,
+        "limit": 2,
+        "offset": 0,
+        "hasMore": true
+    }
+}

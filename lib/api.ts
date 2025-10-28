@@ -3,6 +3,7 @@ import type {
   SweepsResponse,
   AggregatedSweepsResponse,
   DailyMetricsResponse,
+  UserDailyMetricsResponse,
   SweepSortField,
   SortDirection,
   AggregationPeriod,
@@ -27,6 +28,12 @@ export interface AggregatedSweepsFilters {
 }
 
 export interface DailyMetricsFilters {
+  limit?: number;
+  offset?: number;
+}
+
+export interface UserDailyMetricsFilters {
+  address: string;
   limit?: number;
   offset?: number;
 }
@@ -114,6 +121,30 @@ export async function fetchDailyMetrics(
     return response.data;
   } catch (error) {
     console.error("Error fetching daily metrics:", error);
+    throw error;
+  }
+}
+
+export async function fetchUserDailyMetrics(
+  filters: UserDailyMetricsFilters
+): Promise<UserDailyMetricsResponse> {
+  const params = new URLSearchParams();
+
+  // Set defaults
+  const limit = filters.limit ?? 50;
+  const offset = filters.offset ?? 0;
+
+  params.append("limit", limit.toString());
+  params.append("offset", offset.toString());
+
+  const queryString = params.toString();
+  const url = `${API_URL}/api/users/${filters.address}/daily-metrics?${queryString}`;
+
+  try {
+    const response = await axios.get<UserDailyMetricsResponse>(url);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user daily metrics:", error);
     throw error;
   }
 }
