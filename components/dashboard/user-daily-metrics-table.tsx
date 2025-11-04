@@ -23,6 +23,10 @@ const USER_ADDRESSES = [
     label: "Obito_15m_ET",
     address: "0x789eaE0370992d095669515497A9A09C22212a23",
   },
+  {
+    label: "Maximus3",
+    address: "0x7Dd4fa5C3ECC4c27a476AbBd5FeBf53eBA692BD4",
+  },
 ];
 
 const PAGE_SIZE_OPTIONS = [10, 25, 50, 100, -1]; // -1 represents unlimited
