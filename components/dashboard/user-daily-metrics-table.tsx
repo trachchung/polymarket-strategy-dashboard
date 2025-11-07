@@ -20,12 +20,20 @@ import type { UserDailyMetric } from "@/lib/types";
 // User addresses configuration
 const USER_ADDRESSES = [
   {
-    label: "Obito_15m_ET",
+    label: "ET1_3m/15m_5m/1h_0.85SL_0.95-0.05",
     address: "0x789eaE0370992d095669515497A9A09C22212a23",
   },
   {
-    label: "Maximus3",
-    address: "0x7Dd4fa5C3ECC4c27a476AbBd5FeBf53eBA692BD4",
+    label: "ET2_3m/15m_5m/1h_0.5SL_0.95-0.05",
+    address: "0xA1638b7598d06cf758E81F07bB8395b5D3fa6D8d",
+  },
+  {
+    label: "ET3_1m/15m_3m/1h_0.85SL_0.97-0.03",
+    address: "0x78a4F9B58b7e897206733210DF83BAa9A4192448",
+  },
+  {
+    label: "ET4_All_In",
+    address: "0xF9002511eB3C5E3eE05d596B0E4EaB19f30d4354",
   },
 ];
 
