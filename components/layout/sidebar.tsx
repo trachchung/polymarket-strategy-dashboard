@@ -17,6 +17,7 @@ const navigation = [
   { name: "Dashboard", icon: Home, href: "/" },
   { name: "Daily Metrics", icon: Activity, href: "/daily-metrics" },
   { name: "User Metrics", icon: Users, href: "/user-metrics" },
+  { name: "Perp Bet Hedging", icon: BarChart3, href: "/perp-bet-hedging" },
 ];
 
 export function Sidebar() {
