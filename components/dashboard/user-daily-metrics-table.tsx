@@ -43,6 +43,10 @@ const USER_ADDRESSES = [
     ],
   },
   {
+    label: "Crypto Daily",
+    address: "0xfa84f2D7Aa990052E067beCE91aca5aE1563BaB7",
+  },
+  {
     label: "Crypto weekly, politics, tech",
     address: "0xCB1D6C56bd7C39a42C5d7758928cFadA02CbB9B0",
   },
