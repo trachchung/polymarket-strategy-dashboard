@@ -229,6 +229,47 @@ paths:
       summary: Get daily metrics for a user
       tags:
         - users
+  /users/daily-metrics:
+    get:
+      consumes:
+        - application/json
+      description:
+        Get paginated list of daily trading metrics for multiple users.
+        Each row represents a day with aggregated trades and closed positions data.
+      parameters:
+        - description: Comma-separated list of user wallet addresses
+          in: query
+          name: addresses
+          required: true
+          type: string
+        - default: 50
+          description: Number of days to return
+          in: query
+          name: limit
+          type: integer
+        - default: 0
+          description: Number of days to skip
+          in: query
+          name: offset
+          type: integer
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Paginated daily metrics response
+          schema:
+            $ref: "#/definitions/backend.PaginationResponse"
+        "400":
+          description: Bad request
+          schema:
+            $ref: "#/definitions/backend.APIResponse"
+        "500":
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/backend.APIResponse"
+      summary: Get daily metrics for multiple users
+      tags:
+        - users
 schemes:
   - http
 swagger: "2.0"

@@ -38,6 +38,12 @@ export interface UserDailyMetricsFilters {
   offset?: number;
 }
 
+export interface UsersDailyMetricsFilters {
+  addresses: string[]; // Array of addresses to aggregate
+  limit?: number;
+  offset?: number;
+}
+
 export async function fetchSweeps(
   filters: SweepsFilters = {}
 ): Promise<SweepsResponse> {
@@ -145,6 +151,32 @@ export async function fetchUserDailyMetrics(
     return response.data;
   } catch (error) {
     console.error("Error fetching user daily metrics:", error);
+    throw error;
+  }
+}
+
+export async function fetchUsersDailyMetrics(
+  filters: UsersDailyMetricsFilters
+): Promise<UserDailyMetricsResponse> {
+  const params = new URLSearchParams();
+
+  // Set defaults
+  const limit = filters.limit ?? 50;
+  const offset = filters.offset ?? 0;
+
+  // Join addresses with comma
+  params.append("addresses", filters.addresses.join(","));
+  params.append("limit", limit.toString());
+  params.append("offset", offset.toString());
+
+  const queryString = params.toString();
+  const url = `${API_URL}/api/users/daily-metrics?${queryString}`;
+
+  try {
+    const response = await axios.get<UserDailyMetricsResponse>(url);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching users daily metrics:", error);
     throw error;
   }
 }

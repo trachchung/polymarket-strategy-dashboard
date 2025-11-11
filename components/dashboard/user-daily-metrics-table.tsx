@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { format } from "date-fns";
 import { TrendingUp, TrendingDown } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -16,24 +16,39 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useUserDailyMetrics } from "@/hooks/use-user-daily-metrics";
 import type { UserDailyMetric } from "@/lib/types";
+import useSWR from "swr";
+import { fetchUsersDailyMetrics } from "@/lib/api";
 
 // User addresses configuration
 const USER_ADDRESSES = [
   {
-    label: "ET1_3m/15m_5m/1h_0.85SL_0.95-0.05",
-    address: "0x789eaE0370992d095669515497A9A09C22212a23",
+    label: "Cluster ET",
+    addresses: [
+      {
+        label: "ET1_3m/15m_5m/1h_0.85SL_0.95-0.05",
+        address: "0x789eaE0370992d095669515497A9A09C22212a23",
+      },
+      {
+        label: "ET2_3m/15m_5m/1h_0.5SL_0.95-0.05",
+        address: "0xA1638b7598d06cf758E81F07bB8395b5D3fa6D8d",
+      },
+      {
+        label: "ET3_1m/15m_3m/1h_0.85SL_0.97-0.03",
+        address: "0x78a4F9B58b7e897206733210DF83BAa9A4192448",
+      },
+      {
+        label: "ET4_All_In",
+        address: "0xF9002511eB3C5E3eE05d596B0E4EaB19f30d4354",
+      },
+    ],
   },
   {
-    label: "ET2_3m/15m_5m/1h_0.5SL_0.95-0.05",
-    address: "0xA1638b7598d06cf758E81F07bB8395b5D3fa6D8d",
+    label: "Crypto weekly, politics, tech",
+    address: "0xCB1D6C56bd7C39a42C5d7758928cFadA02CbB9B0",
   },
   {
-    label: "ET3_1m/15m_3m/1h_0.85SL_0.97-0.03",
-    address: "0x78a4F9B58b7e897206733210DF83BAa9A4192448",
-  },
-  {
-    label: "ET4_All_In",
-    address: "0xF9002511eB3C5E3eE05d596B0E4EaB19f30d4354",
+    label: "Test strategy before graduate (maximus 3)",
+    address: "0x7Dd4fa5C3ECC4c27a476AbBd5FeBf53eBA692BD4",
   },
 ];
 
@@ -52,20 +67,85 @@ function MetricsRowSkeleton() {
 }
 
 export function UserDailyMetricsTable() {
-  const [selectedAddress, setSelectedAddress] = useState(
-    USER_ADDRESSES[0].address
-  );
+  // Track if we're viewing a cluster or individual address
+  const [selectedItem, setSelectedItem] = useState<{
+    type: "cluster" | "address";
+    clusterLabel?: string;
+    address?: string;
+  }>(() => {
+    const firstItem = USER_ADDRESSES[0];
+    if (firstItem.addresses) {
+      return { type: "cluster", clusterLabel: firstItem.label };
+    }
+    return { type: "address", address: firstItem.address };
+  });
+
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
 
   const offset = pageSize === -1 ? 0 : (currentPage - 1) * pageSize;
   const apiLimit = pageSize === -1 ? undefined : pageSize;
 
-  const { metrics, total, isLoading, hasMore } = useUserDailyMetrics({
-    address: selectedAddress,
+  // Get addresses to fetch based on selection
+  const addressesToFetch = useMemo(() => {
+    if (selectedItem.type === "cluster") {
+      const cluster = USER_ADDRESSES.find(
+        (u) => u.addresses && u.label === selectedItem.clusterLabel
+      );
+      return cluster?.addresses?.map((a) => a.address) || [];
+    }
+    return selectedItem.address ? [selectedItem.address] : [];
+  }, [selectedItem]);
+
+  // Fetch aggregated data for clusters using /users/daily-metrics API
+  const { data: clusterResponse, isLoading: isClusterLoading } = useSWR(
+    selectedItem.type === "cluster" && addressesToFetch.length > 0
+      ? ["cluster-metrics", addressesToFetch, apiLimit, offset]
+      : null,
+    async () => {
+      return fetchUsersDailyMetrics({
+        addresses: addressesToFetch,
+        limit: apiLimit,
+        offset: offset,
+      });
+    },
+    {
+      refreshInterval: 60000,
+      revalidateOnFocus: true,
+    }
+  );
+
+  // For individual addresses, use the existing hook
+  const {
+    metrics: singleMetrics,
+    total: singleTotal,
+    isLoading: isSingleLoading,
+    hasMore: singleHasMore,
+  } = useUserDailyMetrics({
+    address: selectedItem.type === "address" ? selectedItem.address || "" : "",
     limit: apiLimit,
     offset: offset,
   });
+
+  // Use cluster metrics from API or single metrics
+  const metrics = useMemo(() => {
+    if (selectedItem.type === "cluster" && clusterResponse) {
+      return clusterResponse.data.data;
+    }
+    return singleMetrics;
+  }, [selectedItem.type, clusterResponse, singleMetrics]);
+
+  // Get total from API response or single metrics
+  const total = useMemo(() => {
+    if (selectedItem.type === "cluster" && clusterResponse) {
+      return clusterResponse.data.total;
+    }
+    return singleTotal;
+  }, [selectedItem.type, clusterResponse, singleTotal]);
+
+  const isLoading =
+    selectedItem.type === "cluster" ? isClusterLoading : isSingleLoading;
+  const hasMore = selectedItem.type === "address" ? singleHasMore : false;
 
   const totalPages = pageSize === -1 ? 1 : Math.ceil(total / pageSize);
 
@@ -124,8 +204,40 @@ export function UserDailyMetricsTable() {
   };
 
   const getSelectedUserLabel = () => {
-    const user = USER_ADDRESSES.find((u) => u.address === selectedAddress);
-    return user?.label || selectedAddress;
+    if (selectedItem.type === "cluster") {
+      return selectedItem.clusterLabel || "Cluster";
+    }
+    // Check if it's an address from a cluster
+    for (const user of USER_ADDRESSES) {
+      if (user.addresses) {
+        const addr = user.addresses.find(
+          (a) => a.address === selectedItem.address
+        );
+        if (addr) {
+          return addr.label;
+        }
+      }
+      if (user.address === selectedItem.address) {
+        return user.label;
+      }
+    }
+    return selectedItem.address || "";
+  };
+
+  const handleSelectionChange = (value: string) => {
+    // Check if it's a cluster selection (format: "cluster:ClusterName")
+    if (value.startsWith("cluster:")) {
+      const clusterLabel = value.replace("cluster:", "");
+      setSelectedItem({ type: "cluster", clusterLabel });
+    } else if (value.startsWith("address:")) {
+      // Individual address from cluster (format: "address:0x...")
+      const address = value.replace("address:", "");
+      setSelectedItem({ type: "address", address });
+    } else {
+      // Regular address
+      setSelectedItem({ type: "address", address: value });
+    }
+    setCurrentPage(1);
   };
 
   return (
@@ -148,22 +260,50 @@ export function UserDailyMetricsTable() {
         <div className="flex items-center gap-2">
           <label className="text-sm font-medium">User Address:</label>
           <select
-            value={selectedAddress}
-            onChange={(e) => {
-              setSelectedAddress(e.target.value);
-              setCurrentPage(1);
-            }}
+            value={
+              selectedItem.type === "cluster"
+                ? `cluster:${selectedItem.clusterLabel}`
+                : `address:${selectedItem.address}`
+            }
+            onChange={(e) => handleSelectionChange(e.target.value)}
             className="rounded border border-[var(--color-border)] bg-[var(--color-card)] px-3 py-2 text-sm min-w-[250px]"
             disabled={isLoading}
           >
-            {USER_ADDRESSES.map((user) => (
-              <option key={user.address} value={user.address}>
-                {user.label}: {user.address}
-              </option>
-            ))}
+            {USER_ADDRESSES.map((user) => {
+              if (user.addresses) {
+                // Render cluster option
+                return (
+                  <optgroup
+                    key={`cluster-${user.label}`}
+                    label={`📊 ${user.label} (Cluster)`}
+                  >
+                    <option value={`cluster:${user.label}`}>
+                      {user.label} (Aggregated)
+                    </option>
+                    {user.addresses.map((addr) => (
+                      <option
+                        key={addr.address}
+                        value={`address:${addr.address}`}
+                      >
+                        • {addr.label}
+                      </option>
+                    ))}
+                  </optgroup>
+                );
+              }
+              // Render regular address option
+              return (
+                <option key={user.address} value={`address:${user.address}`}>
+                  {user.label}: {user.address}
+                </option>
+              );
+            })}
           </select>
           <div className="text-xs text-[var(--color-text-secondary)]">
             Selected: {getSelectedUserLabel()}
+            {selectedItem.type === "cluster" && (
+              <span className="ml-1 text-blue-500">(Aggregated)</span>
+            )}
           </div>
         </div>
       </CardHeader>
