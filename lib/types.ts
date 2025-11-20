@@ -327,6 +327,7 @@ export type MarketType =
   | "crypto_market_15_minutes"
   | "crypto_market_hourly"
   | "crypto_market_one_day"
+  | "crypto_market_one_day_event_with_markets"
   | "crypto_market_one_week"
   | "crypto_market_monthly"
   | "crypto_market_yearly"
@@ -341,6 +342,15 @@ export type MarketType =
   // Culture markets
   | "culture_market_one_week"
   | "culture_market_other"
+  // Finance markets
+  | "finance_stock_up_or_down_market_daily"
+  | "finance_market_weekly"
+  | "finance_market_monthly"
+  | "finance_market_other"
+  // Sports markets
+  | "sports_soccer"
+  | "sports_basketball"
+  | "sports_tennis"
   // Other markets
   | "temperature_market_one_day"
   | "earnings_market_one_week"

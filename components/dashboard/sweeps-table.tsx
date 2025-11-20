@@ -187,34 +187,6 @@ export function SweepsTable({ limit = 10 }: SweepsTableProps) {
 
   const formatExecTime = (ms: number) => `${ms}ms`;
 
-  const formatMarketTypeLabel = (marketType: MarketType) => {
-    const labels: Record<MarketType, string> = {
-      // Crypto markets
-      crypto_market_15_minutes: "Crypto 15min",
-      crypto_market_hourly: "Crypto Hourly",
-      crypto_market_one_day: "Crypto Daily",
-      crypto_market_one_week: "Crypto Weekly",
-      crypto_market_monthly: "Crypto Monthly",
-      crypto_market_yearly: "Crypto Yearly",
-      crypto_market_other: "Crypto Other",
-      // Tech markets
-      tech_market_one_month: "Tech Monthly",
-      tech_market_other: "Tech Other",
-      // Politics markets
-      politics_market_one_week: "Politics Weekly",
-      politics_market_one_month: "Politics Monthly",
-      politics_market_other: "Politics Other",
-      // Culture markets
-      culture_market_one_week: "Culture Weekly",
-      culture_market_other: "Culture Other",
-      // Other markets
-      temperature_market_one_day: "Temperature Daily",
-      earnings_market_one_week: "Earnings Weekly",
-      market_default: "Default",
-    };
-    return labels[marketType] || marketType;
-  };
-
   const getStatusIcon = (isSuccess: boolean) => {
     if (isSuccess) {
       return <CheckCircle className="h-4 w-4 text-green-500" />;
@@ -283,6 +255,9 @@ export function SweepsTable({ limit = 10 }: SweepsTableProps) {
                   <option value="crypto_market_15_minutes">Crypto 15min</option>
                   <option value="crypto_market_hourly">Crypto Hourly</option>
                   <option value="crypto_market_one_day">Crypto Daily</option>
+                  <option value="crypto_market_one_day_event_with_markets">
+                    Crypto Daily Event with Markets
+                  </option>
                   <option value="crypto_market_one_week">Crypto Weekly</option>
                   <option value="crypto_market_monthly">Crypto Monthly</option>
                   <option value="crypto_market_yearly">Crypto Yearly</option>
@@ -306,6 +281,21 @@ export function SweepsTable({ limit = 10 }: SweepsTableProps) {
                     Culture Weekly
                   </option>
                   <option value="culture_market_other">Culture Other</option>
+                </optgroup>
+                <optgroup label="Finance Markets">
+                  <option value="finance_stock_up_or_down_market_daily">
+                    Finance Stock Up/Down Daily
+                  </option>
+                  <option value="finance_market_weekly">Finance Weekly</option>
+                  <option value="finance_market_monthly">
+                    Finance Monthly
+                  </option>
+                  <option value="finance_market_other">Finance Other</option>
+                </optgroup>
+                <optgroup label="Sports Markets">
+                  <option value="sports_soccer">Sports Soccer</option>
+                  <option value="sports_basketball">Sports Basketball</option>
+                  <option value="sports_tennis">Sports Tennis</option>
                 </optgroup>
                 <optgroup label="Other Markets">
                   <option value="temperature_market_one_day">
