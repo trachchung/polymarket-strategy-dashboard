@@ -54,6 +54,10 @@ const USER_ADDRESSES = [
     label: "Test strategy before graduate (maximus 3)",
     address: "0x7Dd4fa5C3ECC4c27a476AbBd5FeBf53eBA692BD4",
   },
+  {
+    label: "Poly MM 1",
+    address: "0x80bd3756892d0C28075B26969baF8d3BF72f7443",
+  },
 ];
 
 const PAGE_SIZE_OPTIONS = [10, 25, 50, 100, -1]; // -1 represents unlimited
